@@ -24,22 +24,39 @@ class Waiter:
     def __init__(self, chef):
         self.order =[]
         self.chef = chef
-    def chooseChef(self,chef):
-        self.chef = chef
+        self.order2 =[]
+    
+    #cmd already has a binding target
     def SetCmd(self,command):
         self.order.append(command)
         print("Add Order")
     def Notify(self):
         for cmd in self.order:
+            cmd()
+    
+    #cmd is just pure func
+    def chooseChef(self,chef):
+        self.chef = chef
+    def SetCmd2(self,command):
+        self.order2.append(command)
+        print("Add Order")
+    def Notify2(self):
+        for cmd in self.order2:
             cmd(self.chef)
             
 
 if __name__ == "__main__":
-    chef2=Chef2()
-    girl=Waiter(chef2)
-    girl.SetCmd(applePieCmd)
-    girl.SetCmd(chickenCmd)
-    girl.Notify()
     chef=Chef()
-    girl.chooseChef(chef)
-    girl.Notify()
+    waiter=Waiter(chef)
+    
+    #create cmd, binding target
+    waiter.SetCmd(lambda:applePieCmd(chef))
+    waiter.SetCmd(lambda:chickenCmd(chef))
+    waiter.Notify()
+    
+    #the other way, func with args.
+    chef2=Chef()
+    waiter.chooseChef(chef2)
+    waiter.SetCmd2(applePieCmd)
+    waiter.SetCmd2(chickenCmd)
+    waiter.Notify2()
