@@ -2,7 +2,8 @@ import types
 import dis
 
 
-def tail_rec(gen, *args, **kwargs):
+def tramp(gen, *args, **kwargs):
+    """Copyright, 2012, Alex Beal"""
     g = gen(*args, **kwargs)
     while isinstance(g, types.GeneratorType):
         g = next(g)
@@ -23,5 +24,5 @@ def s(n, acc=0):
         yield s(n -1, acc + n)
 
 
-print(tail_rec(f, 1))
-print(tail_rec(s, 100))
+print(tramp(f, 1))
+print(tramp(s, 100))
