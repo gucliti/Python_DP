@@ -45,7 +45,7 @@ def split_num(a_str):
         return (a_str[:idx], int(a_str[idx:]))
 
 def parse_str(s):
-    print(f'received : {s}')
+    #print(f'received : {s}')
     buf = ''
     stack = []
     for i in range(len(s)):
@@ -60,6 +60,7 @@ def parse_str(s):
             buf += s[i]
     return buf
 
-s = 'a2[b3[c]d]edfa2[ds]'
+s = 'a2[b2[c2[x]z]d1[y]]edfg2[hi]'
 g = parse_str(s)
-g
+print(g)
+#abcxxzcxxzdybcxxzcxxzdyedfghihi
