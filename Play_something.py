@@ -48,19 +48,21 @@ def parse_str(s):
     #print(f'received : {s}')
     buf = ''
     stack = []
-    for i in range(len(s)):
-        if s[i] == ']':
+    for c in iter(s):
+        if c == ']':
             _tmp = stack.pop()
             _h, _t = split_num(_tmp)
             buf = _h + buf * _t
-        elif s[i] == '[':
+        elif c == '[':
             stack.append(buf)
             buf = ''
         else:
-            buf += s[i]
+            buf += c
     return buf
 
 s = 'a2[b2[c2[x]z]d1[y]]edfg2[hi]'
-g = parse_str(s)
-print(g)
+print(parse_str(s))
 #abcxxzcxxzdybcxxzcxxzdyedfghihi
+s = '2[a2[b]2[c3[d]]e]'
+print(parse_str(s))
+#abbcdddcdddeabbcdddcddde
